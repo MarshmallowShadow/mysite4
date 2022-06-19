@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- resultMap -->
+<mapper namespace="board">
+	<resultMap id="resultMapBoardVo" type="BoardVo">
+		<result column="no" property="no" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="reg_date" property="regDate" />
+		<result column="user_no" property="userNo" />
+	</resultMap>
+	
+<!-- 쿼리문 작성 -->
+	<!-- insert -->
+	<insert id="insert" parameterType="UserVo">
+		<![CDATA[
+			insert into board
+			values(seq_board_no.nextval, #{title}, #{content}, 0, sysdate, #{userNo})
+		]]>
+	</insert>
+	
+	<!-- delete -->
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from board
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<!-- update (read) -->
+	<update id="plusView" parameterType="int">
+		<![CDATA[
+			update	board
+			set		hit = hit + 1
+			where	no = #{no}
+		]]>
+	</update>
+	
+	<!-- update (modify) -->
+	<update id="modify" parameterType="BoardVo">
+		<![CDATA[
+			update	board
+			set		title = #{title}
+					content = #{content}
+			where	no = #{no}
+		]]>
+	</update>
+	
+	<!-- getList -->
+	<select id="getList" parameterType="String" resultType="map">
+		<![CDATA[
+			select	b.no,
+					title,
+					hit,
+					to_char(reg_date,'YY-MM-DD HH24:MM') regDate,
+					name,
+					user_no userNo
+			from users u, board b
+			where user_no = u.no
+			and (title like #{keyword} or name like #{keyword})
+		]]>
+	</select>
+	
+	<select id="getBoard" parameterType="int" resultType="map">
+		<![CDATA[
+			select	b.no,
+					title,
+					content,
+					hit,
+					reg_date regDate,
+					name,
+					user_no userNo
+			from users u, board b
+			where user_no = u.no
+			and b.no = #{no}
+		]]>
+	</select>
+</mapper>
