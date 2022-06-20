@@ -21,8 +21,8 @@ public class UserService {
 		return count;
 	}
 	
-	public UserVo getAuthUser(UserVo uVo) {
-		UserVo authUser = uDao.getAuthUser(uVo);
+	public UserVo login(UserVo uVo) {
+		UserVo authUser = uDao.login(uVo);
 		return authUser;
 	}
 	

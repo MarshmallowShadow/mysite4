@@ -30,7 +30,7 @@
 	</update>
 	
 	<!-- getUser (login) -->
-	<select id="getAuthUser" parameterType="UserVo" resultMap="resultMapUserVo">
+	<select id="login" parameterType="UserVo" resultMap="resultMapUserVo">
 		<![CDATA[
 			select	no,
 					name

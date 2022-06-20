@@ -2,10 +2,12 @@ package com.javaex.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.UserService;
+import com.javaex.vo.UserVo;
 
 @Controller
 @RequestMapping("/user")
@@ -20,10 +22,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String join() {
+	public String join(@ModelAttribute UserVo uVo) {
 		//System.out.println("UserController: join");
-		
-		return "redirect:/main";
+		int count = uService.userInsert(uVo);
+		return "user/joinOk";
 	}
 	
 	@RequestMapping(value = "/loginForm", method = { RequestMethod.GET, RequestMethod.POST })
@@ -33,8 +35,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login() {
+	public String login(@ModelAttribute UserVo uVo) {
 		//System.out.println("UserController: login");
+		
+		UserVo authUser = uService.login(uVo);
 		
 		return "redirect:/main";
 	}
@@ -54,8 +58,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/modify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String modify() {
+	public String modify(@ModelAttribute UserVo uVo) {
 		//System.out.println("UserController: modify");
+		int count = uService.update(uVo);
+		
 		
 		return "redirect:/main";
 	}

@@ -30,8 +30,8 @@ public class UserDao {
 	}
 	
 	//로그인 (아이디, 비밀번호 들어간 UserVo필수, 회원번호(no), 이름 들어간 authUser 리턴)
-	public UserVo getAuthUser(UserVo uVo) {
-		UserVo authUser = sqlSession.selectOne("users.getAuthUser", uVo);
+	public UserVo login(UserVo uVo) {
+		UserVo authUser = sqlSession.selectOne("users.login", uVo);
 		return authUser;
 	}
 	
