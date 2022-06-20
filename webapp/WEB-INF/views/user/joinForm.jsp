@@ -49,7 +49,7 @@
 					<div id="user">
 						<div id="joinForm">
 							<%-- user controller로 정보 보내기 --%>
-							<form action="#" method="post">
+							<form action="/mysite4/user/join" method="post">
 								<%-- action을 join으로 지정 --%>
 								<!-- 아이디 -->
 								<div class="form-group">

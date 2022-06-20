@@ -15,12 +15,11 @@ import com.javaex.service.GuestBookService;
 import com.javaex.vo.GuestVo;
 
 @Controller
-@RequestMapping("/guestbook")
 public class GuestBookController {
 	@Autowired
 	private GuestBookService gService;
 	
-	@RequestMapping(value = "/addList", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/guestbook/addList", method = { RequestMethod.GET, RequestMethod.POST })
 	public String addList(Model model) {
 		//System.out.println("GuestBookController: addList");
 		List<GuestVo> gList = gService.getList();
@@ -28,21 +27,21 @@ public class GuestBookController {
 		return "guestbook/addList";
 	}
 	
-	@RequestMapping(value = "/add", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/guestbook/add", method = { RequestMethod.GET, RequestMethod.POST })
 	public String add(@ModelAttribute GuestVo gVo) {
 		//System.out.println("GuestBookController: add");
 		int count = gService.insert(gVo);
 		return "redirect:/guestbook/addList";
 	}
 	
-	@RequestMapping(value = "/deleteForm/{no}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/guestbook/deleteForm/{no}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String deleteForm(Model model, @PathVariable int no) {
 		//System.out.println("GuestBookController: deleteForm");
 		model.addAttribute("no", no);
 		return "guestbook/deleteForm";
 	}
 	
-	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/guestbook/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public String main(@RequestParam int no,
 						@RequestParam String password) {
 		//System.out.println("GuestBookController: delete");

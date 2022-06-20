@@ -11,8 +11,8 @@ public class UserService {
 	@Autowired
 	private UserDao uDao;
 	
-	public int userInsert(UserVo uVo) {
-		int count = uDao.userInsert(uVo);
+	public int join(UserVo uVo) {
+		int count = uDao.join(uVo);
 		return count;
 	}
 	

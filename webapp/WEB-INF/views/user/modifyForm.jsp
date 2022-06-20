@@ -49,7 +49,7 @@
 					<div id="user">
 						<div id="modifyForm">
 							<%-- request에 보낸 정보들 꺼내기 --%>
-							<form action="#" method="post">
+							<form action="/mysite4/user/modify" method="post">
 								<!-- action이랑 id값들 보낼 수 있게 "hidden" input으로 "저장" -->
 								<input type="hidden" name="id" value="${requestScope.uVo.id }">
 								

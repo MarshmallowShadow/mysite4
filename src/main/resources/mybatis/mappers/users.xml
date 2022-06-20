@@ -12,7 +12,7 @@
 	
 <!-- 쿼리문 작성 -->
 	<!-- insert -->
-	<insert id="insert" parameterType="UserVo">
+	<insert id="join" parameterType="UserVo">
 		<![CDATA[
 			insert into users
 			values(seq_users_no.nextval, #{id}, #{password}, #{name}, #{gender})
@@ -48,7 +48,7 @@
 					name,
 					gender
 			from users
-			where no = ${no}
+			where no = #{no}
 		]]>
 	</select>
 

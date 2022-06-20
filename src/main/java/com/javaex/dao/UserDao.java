@@ -12,8 +12,8 @@ public class UserDao {
 	private SqlSession sqlSession;
 	
 	//회원가입 (아이디, 비밀번호, 이름, 성별 저장된 UserVo필요)
-	public int userInsert(UserVo uVo) {
-		int count = sqlSession.insert("users.userInsert", uVo);
+	public int join(UserVo uVo) {
+		int count = sqlSession.insert("users.join", uVo);
 		return count;
 	}
 	

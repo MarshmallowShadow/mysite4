@@ -52,7 +52,7 @@
 								회원가입을 축하합니다.<br>
 								<br>
 								<%-- 로그인 폼 이동 --%>
-								<a href="#" >[로그인하기]</a>
+								<a href="/mysite4/user/loginForm" >[로그인하기]</a>
 							</p>
 								
 						</div>

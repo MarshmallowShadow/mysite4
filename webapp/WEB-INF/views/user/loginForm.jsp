@@ -47,7 +47,7 @@
 		
 					<div id="user">
 						<div id="loginForm">
-							<form action="#" method="post">
+							<form action="/mysite4/user/login" method="post">
 								<!-- 아이디 -->
 								<div class="form-group">
 									<label class="form-text" for="input-uid">아이디</label> 
@@ -59,7 +59,9 @@
 									<label class="form-text" for="input-pass">비밀번호</label> 
 									<input type="password" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
 								</div>
-		
+								
+								<c:if test="${param.login == 'fail'}"><p style="color:red">로그인 실패했습니다. 다시 시도하세요</p></c:if>
+								
 								
 								<!-- 버튼영역 -->
 								<div class="button-area">

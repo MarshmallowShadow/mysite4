@@ -15,12 +15,11 @@ import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
 
 @Controller
-@RequestMapping("/board")
 public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
-	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Model model, String keyword) {
 		//System.out.println("BoardController: addList");
 		List<Map<String, Object>> bList = bService.getList(keyword);
@@ -28,27 +27,27 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@RequestMapping(value="delete/{no}", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/delete/{no}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String delete(@PathVariable int no) {
 		//System.out.println("BoardController: delete");
 		int count = bService.delete(no);
 		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value="writeForm", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/writeForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String writeForm(Model model, @PathVariable int no) {
 		//System.out.println("BoardController: writeForm");
 		return "board/writeForm";
 	}
 	
-	@RequestMapping(value="write", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/write", method = {RequestMethod.GET, RequestMethod.POST})
 	public String write(@ModelAttribute BoardVo bVo) {
 		//System.out.println("BoardController: write");
 		int count = bService.insert(bVo);
 		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value="read/{no}", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/read/{no}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String read(Model model, @PathVariable int no) {
 		//System.out.println("BoardController: read");
 		Map<String, Object> bMap = bService.getBoard(no);
@@ -56,7 +55,7 @@ public class BoardController {
 		return "board/read";
 	}
 	
-	@RequestMapping(value="modifyForm/{no}", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/modifyForm/{no}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(Model model, @PathVariable int no) {
 		//System.out.println("BoardController: modifyForm");
 		Map<String, Object> bMap = bService.getBoard(no);
@@ -64,7 +63,7 @@ public class BoardController {
 		return "board/modifyForm";
 	}
 	
-	@RequestMapping(value="modify", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/modify", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modify(@ModelAttribute BoardVo bVo) {
 		//System.out.println("BoardController: modify");
 		int count = bService.modify(bVo);
