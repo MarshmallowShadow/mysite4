@@ -6,8 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>수정</title>
-		<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="/mysite4/assets/css/user.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 		
 	</head>
 	
@@ -46,7 +46,7 @@
 					<div id="user">
 						<div id="modifyForm">
 							<%-- request에 보낸 정보들 꺼내기 --%>
-							<form action="/mysite4/user/modify" method="post">
+							<form action="#{pageContext.request.contextPath}/user/modify" method="post">
 								<!-- action이랑 id값들 보낼 수 있게 "hidden" input으로 "저장" -->
 								<input type="hidden" name="id" value="${requestScope.uVo.id }">
 								

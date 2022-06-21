@@ -6,8 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link href="/mysite3/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="/mysite3/assets/css/board.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 	</head>
 	
 	
@@ -45,7 +45,7 @@
 					<div id="board">
 						<div id="writeForm">
 							<%-- 게시글 작성 폼 --%>
-							<form action="/mysite4/board/write" method="get">
+							<form action="#{pageContext.request.contextPath}/board/write" method="get">
 								<%-- 추가로 필요한 정보들: action=write, authUser에 저장된 사용자 번호(no)를 userNo로 저장 --%>
 								<input type="hidden" name="userNo" value="${authUser.no}">
 								<!-- 제목 -->
@@ -59,7 +59,7 @@
 									<textarea id="txt-content" name="content"></textarea>
 								</div>
 								
-								<a id="btn_cancel" href="/mysite4/board/list">취소</a>
+								<a id="btn_cancel" href="#{pageContext.request.contextPath}/board/list">취소</a>
 								<button id="btn_add" type="submit" >등록</button>
 								
 							</form>

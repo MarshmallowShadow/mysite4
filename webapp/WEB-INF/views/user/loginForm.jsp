@@ -7,8 +7,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>로그인</title>
-		<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="/mysite4/assets/css/user.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div id="wrap">
@@ -44,7 +44,7 @@
 		
 					<div id="user">
 						<div id="loginForm">
-							<form action="/mysite4/user/login" method="post">
+							<form action="#{pageContext.request.contextPath}/user/login" method="post">
 								<!-- 아이디 -->
 								<div class="form-group">
 									<label class="form-text" for="input-uid">아이디</label> 

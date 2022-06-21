@@ -6,8 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>삭제 확인</title>
-		<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="/mysite4/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="#{pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 	
 	</head>
 	
@@ -44,7 +44,7 @@
 		
 					<div id="guestbook">
 						<%-- 삭제 확인 폼 (비밀번호 입력) --%>
-						<form action="/mysite4/guestbook/delete" method="post">
+						<form action="#{pageContext.request.contextPath}/guestbook/delete" method="post">
 							<%-- 삭제에 추가로 필요한 action이랑 no 저장 --%>
 							<input type="hidden" name="no" value="${no }">
 							<table id="guestDelete">
@@ -58,7 +58,7 @@
 									<td>비밀번호</td>
 									<td><input type="password" name="password"></td>
 									<td class="text-left"><button type="submit">삭제</button></td>
-									<td><a href="/mysite4/guestbook/addList">[메인으로 돌아가기]</a></td> <%-- 삭제취소 --%>
+									<td><a href="#{pageContext.request.contextPath}/guestbook/addList">[메인으로 돌아가기]</a></td> <%-- 삭제취소 --%>
 								</tr>
 							</table>
 						</form>
