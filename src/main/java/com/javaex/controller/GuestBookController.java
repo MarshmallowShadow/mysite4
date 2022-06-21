@@ -47,7 +47,7 @@ public class GuestBookController {
 						@RequestParam String password) {
 		//System.out.println("GuestBookController: delete");
 		int count = gService.delete(no, password);
-
+		
 		if(count > 0) { //삭제 성공일 경우 메인으로 돌아가기
 			return "redirect:/guestbook/addList";
 		}
