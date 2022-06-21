@@ -7,8 +7,8 @@
 		<meta charset="UTF-8">
 		<title>방명록</title>
 		
-		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="#{pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 		
 	</head>
 	
@@ -44,7 +44,7 @@
 	
 					<div id="guestbook">
 						<%-- 방병록 작성 폼 --%>
-						<form action="#{pageContext.request.contextPath}/guestbook/add" method="post">
+						<form action="${pageContext.request.contextPath}/guestbook/add" method="post">
 							<input type="hidden" name="action" value="add">
 							<table id="guestAdd">
 								<colgroup>
@@ -87,7 +87,7 @@
 									<td>${gVo.no }</td>
 									<td>${gVo.name }</td>
 									<td>${gVo.regDate }</td>
-									<td><a href="#{pageContext.request.contextPath}/guestbook/deleteForm/${gVo.no }">[삭제]</a></td>
+									<td><a href="${pageContext.request.contextPath}/guestbook/deleteForm/${gVo.no }">[삭제]</a></td>
 								</tr>
 								<tr>
 									<td colspan=4 class="text-left">${gVo.content }</td>

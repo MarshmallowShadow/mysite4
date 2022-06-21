@@ -6,8 +6,8 @@
 	<head>
 	<meta charset="UTF-8">
 		<title>회원가입</title>
-		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="#{pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 	</head>
 	
 	<body>
@@ -46,7 +46,7 @@
 					<div id="user">
 						<div id="joinForm">
 							<%-- user controller로 정보 보내기 --%>
-							<form action="/mysite4/user/join" method="post">
+							<form action="${pageContext.request.contextPath}/user/join" method="post">
 								<%-- action을 join으로 지정 --%>
 								<!-- 아이디 -->
 								<div class="form-group">

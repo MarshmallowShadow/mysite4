@@ -6,8 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>게시판</title>
-		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="#{pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 	</head>
 	
 	
@@ -44,7 +44,7 @@
 		
 					<div id="board">
 						<div id="list">
-							<form action="/mysite4/board/list" method="get">
+							<form action="${pageContext.request.contextPath}/board/list" method="get">
 								<div class="form-group text-right">
 									<input type="hidden" name="action" value="list">
 									<input type="text" name="keyword" value="">
@@ -67,13 +67,13 @@
 									<c:forEach items="${bList}" var="bMap">
 										<tr>
 											<td>${bMap.NO }</td>
-											<td class="text-left"><a href="/mysite4/board/read/${bMap.NO }">${bMap.TITLE }</a></td>
+											<td class="text-left"><a href="${pageContext.request.contextPath}/board/read/${bMap.NO }">${bMap.TITLE }</a></td>
 											<td>${bMap.NAME }</td>
 											<td>${bMap.HIT }</td>
 											<td>${bMap.REGDATE }</td>
 											<td>
 												<c:if test="${authUser.no == bMap.USERNO }">
-													<a href="/mysite4/board/delete/${bMap.NO }">[삭제]</a>
+													<a href="${pageContext.request.contextPath}/board/delete/${bMap.NO }">[삭제]</a>
 												</c:if>
 											</td>
 										</tr>

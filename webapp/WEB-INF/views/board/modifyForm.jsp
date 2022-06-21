@@ -5,8 +5,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>수정</title>
-		<link href="#{pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-		<link href="#{pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 	
 	</head>
 	
@@ -45,7 +45,7 @@
 					<div id="board">
 						<div id="modifyForm">
 							<%-- 수정폼 (컨트롤러가 보낸 정보들 해당 의치에 넣어주기) --%>
-							<form action="#{pageContext.request.contextPath}/board/modify" method="get">
+							<form action="${pageContext.request.contextPath}/board/modify" method="get">
 								<%-- action이랑 no hidden으로 저장 --%>
 								<input type="hidden" name="no" value="${bMap.NO }">
 								<!-- 작성자 -->
@@ -79,7 +79,7 @@
 									<textarea id="txt-content" name="content">${bMap.CONTENT }</textarea>
 								</div>
 								
-								<a id="btn_cancel" href="#{pageContext.request.contextPath}/board/read/${bMap.NO }">취소</a>
+								<a id="btn_cancel" href="${pageContext.request.contextPath}/board/read/${bMap.NO }">취소</a>
 								<button id="btn_modify" type="submit" >수정</button>
 							</form>
 							<!-- //form -->
