@@ -16,9 +16,6 @@
 			<!-- //header -->
 			<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	
-			<!-- //nav -->
-			<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
-	
 			<div id="container" class="clearfix">
 				<div id="aside">
 					<h2>회원</h2>
@@ -85,9 +82,11 @@
 								<!-- 약관동의 -->
 								<div class="form-group">
 									<span class="form-text">약관동의</span> 
-									
-									<input type="checkbox" id="chk-agree" name="agree">
-									<label for="chk-agree">서비스 약관에 동의합니다.</label> 
+									<input type="radio" id="rdo-disagree" name="agree" value="false" checked>
+									<label for="rdo-agree">서비스 약관에 동의하지 않습니다.</label> <br>
+									<span class="form-text"></span> 
+									<input type="radio" id="rdo-agree" name="agree" value="true">
+									<label for="rdo-agree">서비스 약관에 동의합니다.</label> 
 								</div>
 								
 								<!-- 버튼영역 -->

@@ -18,9 +18,6 @@
 			<!-- //header -->
 			<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	
-			<!-- //nav -->
-			<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
-		
 			<div id="container" class="clearfix">
 				<div id="aside">
 					<h2>방명록</h2>
