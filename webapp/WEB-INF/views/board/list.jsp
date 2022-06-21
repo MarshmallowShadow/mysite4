@@ -102,7 +102,7 @@
 							</div>
 							<c:choose>
 								<c:when test="${authUser == null }"></c:when>
-								<c:otherwise><a id="btn_write" href="#">글쓰기</a></c:otherwise>
+								<c:otherwise><a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a></c:otherwise>
 							</c:choose>
 						
 						</div>

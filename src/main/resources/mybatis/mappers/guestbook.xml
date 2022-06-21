@@ -37,7 +37,7 @@
 					content,
 					to_char(reg_date, 'YYYY-MM-DD HH24:MM:SS') reg_date
 			from guestbook
-			order by no asc
+			order by reg_date desc
 		]]>
 	</select>
 	

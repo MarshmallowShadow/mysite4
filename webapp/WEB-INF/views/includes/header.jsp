@@ -5,7 +5,7 @@
 <!-- html태그 없어도 됨 -->
 <div id="header" class="clearfix">
 	<h1>
-		<a href="/mysite4/main">MySite</a>
+		<a href="${pageContext.request.contextPath}/main">MySite</a>
 	</h1>
 	
 	<%-- 로그인 상태에 따라 어떤결 표시할지 정하기 --%>

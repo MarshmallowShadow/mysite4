@@ -41,7 +41,7 @@
 	<update id="modify" parameterType="BoardVo">
 		<![CDATA[
 			update	board
-			set		title = #{title}
+			set		title = #{title},
 					content = #{content}
 			where	no = #{no}
 		]]>
@@ -59,6 +59,7 @@
 			from users u, board b
 			where user_no = u.no
 			and (title like #{keyword} or name like #{keyword})
+			order by regDate desc
 		]]>
 	</select>
 	
