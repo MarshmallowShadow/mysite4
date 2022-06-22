@@ -64,7 +64,7 @@ public class BoardController {
 		//System.out.println("BoardController: read");
 		
 		//정보 가져오기
-		Map<String, Object> bMap = bService.getBoard(no);
+		Map<String, Object> bMap = bService.read(no);
 		model.addAttribute("bMap", bMap);
 		return "board/read";
 	}

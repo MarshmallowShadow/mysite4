@@ -53,7 +53,7 @@
 			select	b.no,
 					title,
 					hit,
-					to_char(reg_date,'YY-MM-DD HH24:MM') regDate,
+					to_char(reg_date,'YY-MM-DD') regDate,
 					name,
 					user_no userNo
 			from users u, board b

@@ -34,9 +34,9 @@ public class BoardService {
 		return bList;
 	}
 	
-	public Map<String, Object> getBoard(int no) {
+	public Map<String, Object> read(int no) {
+		//조회수 1 증가 (Business Logic)
 		int count = bDao.plusView(no);
-		
 		Map<String, Object> bMap = bDao.getBoard(no);
 		return bMap;
 	}
