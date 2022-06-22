@@ -24,11 +24,6 @@ public class BoardService {
 		return count;
 	}
 	
-	public int plusView(int no) {
-		int count = bDao.plusView(no);
-		return count;
-	}
-	
 	public int modify(BoardVo bVo) {
 		int count = bDao.modify(bVo);
 		return count;
@@ -40,6 +35,8 @@ public class BoardService {
 	}
 	
 	public Map<String, Object> getBoard(int no) {
+		int count = bDao.plusView(no);
+		
 		Map<String, Object> bMap = bDao.getBoard(no);
 		return bMap;
 	}
