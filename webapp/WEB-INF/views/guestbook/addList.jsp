@@ -45,7 +45,6 @@
 					<div id="guestbook">
 						<%-- 방병록 작성 폼 --%>
 						<form action="${pageContext.request.contextPath}/guestbook/add" method="post">
-							<input type="hidden" name="action" value="add">
 							<table id="guestAdd">
 								<colgroup>
 									<col style="width: 70px;">
@@ -69,9 +68,7 @@
 								</tbody>
 								
 							</table>
-							<!-- //guestWrite -->
-							<input type="hidden" name="action" value="add">
-							
+							<!-- //guestWrite -->							
 						</form>	
 						
 						<%-- 글 목록 반복문으로 나열 --%>
