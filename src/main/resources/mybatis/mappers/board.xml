@@ -63,6 +63,7 @@
 		]]>
 	</select>
 	
+	<!-- getBoard -->
 	<select id="getBoard" parameterType="int" resultType="map">
 		<![CDATA[
 			select	b.no,

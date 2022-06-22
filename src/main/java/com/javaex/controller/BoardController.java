@@ -64,7 +64,7 @@ public class BoardController {
 		//System.out.println("BoardController: read");
 		
 		//정보 가져오기
-		Map<String, Object> bMap = bService.read(no);
+		Map<String, Object> bMap = bService.getBoard(true, no);
 		model.addAttribute("bMap", bMap);
 		return "board/read";
 	}
@@ -73,7 +73,7 @@ public class BoardController {
 	public String modifyForm(Model model, @PathVariable int no) {
 		//System.out.println("BoardController: modifyForm");
 		
-		Map<String, Object> bMap = bService.getBoard(no);
+		Map<String, Object> bMap = bService.getBoard(false, no);
 		
 		//convert line break from HTML to java
 		String edit = ((String)bMap.get("CONTENT")).replace("<br>", "\n");
