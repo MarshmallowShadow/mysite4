@@ -22,6 +22,7 @@ public class UserController {
 	@RequestMapping(value = "/joinForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String joinForm() {
 		//System.out.println("UserController: joinForm");
+		
 		return "user/joinForm";
 	}
 	
@@ -72,6 +73,7 @@ public class UserController {
 	@RequestMapping(value = "/modifyForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String modifyForm(Model model, HttpSession session) {
 		//System.out.println("UserController: modifyForm");
+		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		int no = authUser.getNo();
 		
@@ -84,6 +86,7 @@ public class UserController {
 	@RequestMapping(value = "/modify", method = { RequestMethod.GET, RequestMethod.POST })
 	public String modify(@ModelAttribute UserVo uVo, HttpSession session) {
 		//System.out.println("UserController: modify");
+		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		int no = authUser.getNo();
 		uVo.setNo(no);
@@ -91,6 +94,8 @@ public class UserController {
 		int count = uService.update(uVo);
 		
 		authUser.setName(uVo.getName());
+		session.setAttribute("authUser", authUser);
+		
 		return "redirect:/main";
 	}
 }

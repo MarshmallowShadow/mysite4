@@ -43,7 +43,6 @@ public class BoardDao {
 		if(keyword == null) {
 			keyword = "";
 		}
-		keyword = "%" + keyword + "%";
 		
 		List<Map<String, Object>> bList = sqlSession.selectList("board.getList", keyword);
 		return bList;

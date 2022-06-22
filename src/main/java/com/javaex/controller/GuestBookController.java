@@ -23,6 +23,7 @@ public class GuestBookController {
 	@RequestMapping(value = "/addList", method = { RequestMethod.GET, RequestMethod.POST })
 	public String addList(Model model) {
 		//System.out.println("GuestBookController: addList");
+		
 		List<GuestVo> gList = gService.getList();
 		model.addAttribute("gList", gList);
 		return "guestbook/addList";
@@ -31,6 +32,7 @@ public class GuestBookController {
 	@RequestMapping(value = "/add", method = { RequestMethod.GET, RequestMethod.POST })
 	public String add(@ModelAttribute GuestVo gVo) {
 		//System.out.println("GuestBookController: add");
+		
 		int count = gService.insert(gVo);
 		return "redirect:/guestbook/addList";
 	}
@@ -38,6 +40,7 @@ public class GuestBookController {
 	@RequestMapping(value = "/deleteForm/{no}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String deleteForm(Model model, @PathVariable int no) {
 		//System.out.println("GuestBookController: deleteForm");
+		
 		model.addAttribute("no", no);
 		return "guestbook/deleteForm";
 	}
@@ -46,6 +49,7 @@ public class GuestBookController {
 	public String main(@RequestParam String password,
 						@PathVariable int no) {
 		//System.out.println("GuestBookController: delete");
+		
 		int count = gService.delete(no, password);
 		
 		if(count > 0) { //삭제 성공일 경우 메인으로 돌아가기
