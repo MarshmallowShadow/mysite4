@@ -45,9 +45,8 @@
 					<div id="board">
 						<div id="modifyForm">
 							<%-- 수정폼 (컨트롤러가 보낸 정보들 해당 의치에 넣어주기) --%>
-							<form action="${pageContext.request.contextPath}/board/modify" method="get">
+							<form action="${pageContext.request.contextPath}/board/modify/${bMap.NO }" method="get">
 								<%-- action이랑 no hidden으로 저장 --%>
-								<input type="hidden" name="no" value="${bMap.NO }">
 								<!-- 작성자 -->
 								<div class="form-group">
 									<span class="form-text">작성자</span>

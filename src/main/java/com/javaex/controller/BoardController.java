@@ -83,13 +83,14 @@ public class BoardController {
 		return "board/modifyForm";
 	}
 	
-	@RequestMapping(value="/modify", method = {RequestMethod.GET, RequestMethod.POST})
-	public String modify(@ModelAttribute BoardVo bVo) {
+	@RequestMapping(value="/modify/{no}", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@ModelAttribute BoardVo bVo, @PathVariable int no) {
 		//System.out.println("BoardController: modify");
 		
 		//convert line break from java to html
 		String edit = bVo.getContent().replace("\n", "<br>");
 		bVo.setContent(edit);
+		bVo.setNo(no);
 		
 		int count = bService.modify(bVo);
 		return "redirect:/board/list";
