@@ -85,7 +85,11 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo uVo, HttpSession session) {
 		//System.out.println("UserController: modify");
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int no = authUser.getNo();
+		uVo.setNo(no);
+		
 		int count = uService.update(uVo);
+		
 		authUser.setName(uVo.getName());
 		return "redirect:/main";
 	}
