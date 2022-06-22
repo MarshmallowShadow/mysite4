@@ -40,4 +40,9 @@ public class BoardService {
 		Map<String, Object> bMap = bDao.getBoard(no);
 		return bMap;
 	}
+	
+	public Map<String, Object> getBoard(int no) {
+		Map<String, Object> bMap = bDao.getBoard(no);
+		return bMap;
+	}
 }
