@@ -63,9 +63,6 @@ public class BoardController {
 	public String read(Model model, @PathVariable int no) {
 		//System.out.println("BoardController: read");
 		
-		//조회수 1 증가
-		int count = bService.plusView(no);
-		
 		//정보 가져오기
 		Map<String, Object> bMap = bService.getBoard(no);
 		model.addAttribute("bMap", bMap);
