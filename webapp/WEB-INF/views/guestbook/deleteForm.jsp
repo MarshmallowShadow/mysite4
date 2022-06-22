@@ -44,9 +44,7 @@
 		
 					<div id="guestbook">
 						<%-- 삭제 확인 폼 (비밀번호 입력) --%>
-						<form action="${pageContext.request.contextPath}/guestbook/delete" method="post">
-							<%-- 삭제에 추가로 필요한 action이랑 no 저장 --%>
-							<input type="hidden" name="no" value="${no }">
+						<form action="${pageContext.request.contextPath}/guestbook/delete/${no }" method="post">
 							<table id="guestDelete">
 								<colgroup>
 									<col style="width: 10%;">
