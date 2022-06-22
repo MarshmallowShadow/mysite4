@@ -42,9 +42,9 @@ public class GuestBookController {
 		return "guestbook/deleteForm";
 	}
 	
-	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String main(@RequestParam int no,
-						@RequestParam String password) {
+	@RequestMapping(value = "/delete/{no}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String main(@RequestParam String password,
+						@PathVariable int no) {
 		//System.out.println("GuestBookController: delete");
 		int count = gService.delete(no, password);
 		
