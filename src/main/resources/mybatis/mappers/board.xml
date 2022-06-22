@@ -58,7 +58,7 @@
 					user_no userNo
 			from users u, board b
 			where user_no = u.no
-			and (title like '%' + #{keyword} + '%' or name like '%' + #{keyword} + '%')
+			and (title like #{keyword} or name like #{keyword})
 			order by regDate desc
 		]]>
 	</select>
