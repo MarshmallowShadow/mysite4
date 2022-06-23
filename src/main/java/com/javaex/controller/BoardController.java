@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
@@ -24,7 +25,7 @@ public class BoardController {
 	private BoardService bService;
 	
 	@RequestMapping(value="/list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String list(Model model, String keyword) {
+	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
 		//System.out.println("BoardController: addList");
 		List<Map<String, Object>> bList = bService.getList(keyword);
 		model.addAttribute("bList", bList);

@@ -40,12 +40,8 @@ public class BoardDao {
 	
 	//게시판에 나열할 게시글 목록 가져오기
 	public List<Map<String, Object>> getList(String keyword){
-		if(keyword == null) {
-			keyword = "";
-		}
-		keyword = "%" + keyword + "%";
-		
-		List<Map<String, Object>> bList = sqlSession.selectList("board.getList", keyword);
+		List<Map<String, Object>> bList;
+		bList = sqlSession.selectList("board.getList", keyword);
 		return bList;
 	}
 	

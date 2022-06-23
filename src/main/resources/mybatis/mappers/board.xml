@@ -58,7 +58,11 @@
 					user_no userNo
 			from users u, board b
 			where user_no = u.no
-			and (title like #{keyword} or name like #{keyword})
+		]]>
+		<if test="value!=null">
+			and (title like '%'||#{value}||'%' or name like '%'||#{value}||'%')
+		</if>
+		<![CDATA[
 			order by regDate desc
 		]]>
 	</select>
