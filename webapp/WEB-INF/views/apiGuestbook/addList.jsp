@@ -74,25 +74,7 @@
 						</form>	
 						
 						<%-- 글 목록 반복문으로 나열 --%>
-						<c:forEach items="${gList}" var="gVo" varStatus="status">
-							<table class="guestRead">
-								<colgroup>
-									<col style="width: 10%;">
-									<col style="width: 40%;">
-									<col style="width: 40%;">
-									<col style="width: 10%;">
-								</colgroup>
-								<tr>
-									<td>${gVo.no }</td>
-									<td>${gVo.name }</td>
-									<td>${gVo.regDate }</td>
-									<td><a href="${pageContext.request.contextPath}/guestbook/deleteForm/${gVo.no }">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td colspan=4 class="text-left">${gVo.content }</td>
-								</tr>
-							</table>
-						</c:forEach>
+						<div id="guestRead"></div>
 						<!-- //guestRead -->
 						
 					</div>
@@ -110,8 +92,46 @@
 	
 	</body>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			
+		$(document).ready(function(){ //triggers when all elements in the html file finishes loading
+			$.ajax({
+				url: "${pageContext.request.contextPath}/api/guestbook/list",
+				type : "post",
+				
+				dataType: "json",
+				success : function(gList){
+					//console.log(gList);
+					/*성공시 처리해야될 코드 작성*/
+					
+					for(var i=0; i<gList.length; i++){
+						render(gList[i]);
+					}
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});
 		});
+		
+		function render(gVo){	
+			$("#guestRead").append(
+					'<table class="guestRead">' +
+					'	<colgroup>' +
+					'		<col style="width: 10%;">' +
+					'		<col style="width: 40%;">' +
+					'		<col style="width: 40%;">' +
+					'		<col style="width: 10%;">' +
+					'	</colgroup>' +
+					'	<tr>' +
+					'		<td>' + gVo.no + '</td>' +
+					'		<td>' + gVo.name + '</td>' +
+					'		<td>' + gVo.regDate + '</td>' +
+					'		<td><a href="${pageContext.request.contextPath}/guestbook/deleteForm/' + gVo.no + '">[삭제]</a></td>' +
+					'	</tr>' +
+					'	<tr>' +
+					'		<td colspan=4 class="text-left">' + gVo.content + '</td>' +
+					'	</tr>' +
+					'</table>'
+			);
+		};
 	</script>
 </html>
