@@ -45,18 +45,17 @@ public class GuestBookController {
 		return "guestbook/deleteForm";
 	}
 	
-	@RequestMapping(value = "/delete/{no}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String main(@RequestParam String password,
-						@PathVariable int no) {
+	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String main(@ModelAttribute GuestVo gVo) {
 		//System.out.println("GuestBookController: delete");
 		
-		int count = gService.delete(no, password);
+		int count = gService.delete(gVo);
 		
 		if(count > 0) { //삭제 성공일 경우 메인으로 돌아가기
 			return "redirect:/guestbook/addList";
 		}
 		else { //틀릴 경우 새로고침하기
-			return "redirect:/guestbook/deleteForm/" + no;
+			return "redirect:/guestbook/deleteForm/" + gVo.getNo();
 		}
 	}
 }

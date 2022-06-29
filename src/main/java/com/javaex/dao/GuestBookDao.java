@@ -15,17 +15,13 @@ public class GuestBookDao {
 	private SqlSession sqlSession;
 
 
-	public int insert(GuestVo gVo) {
-		int count = sqlSession.insert("guestbook.insert", gVo);
+	public int insert(GuestVo guestVo) {
+		int count = sqlSession.insert("guestbook.insert", guestVo);
 		return count;
 	}
 
 
-	public int delete(int no, String password) {
-		GuestVo gVo = new GuestVo();
-		gVo.setNo(no);
-		gVo.setPassword(password);
-		
+	public int delete(GuestVo gVo) {
 		int count = sqlSession.delete("guestbook.delete", gVo);
 		return count;
 	}
@@ -34,5 +30,10 @@ public class GuestBookDao {
 	public List<GuestVo> getList() {
 		List<GuestVo> gList = sqlSession.selectList("guestbook.getList");
 		return gList;
+	}
+	
+	public GuestVo getGuest(int no) {
+		GuestVo gVo = sqlSession.selectOne("guestbook.getGuest", no);
+		return gVo;
 	}
 }
