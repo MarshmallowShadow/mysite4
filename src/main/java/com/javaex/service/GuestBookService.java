@@ -22,7 +22,7 @@ public class GuestBookService {
 		return count;
 	}
 	//ajax insert
-	public GuestVo ajaxInsert(GuestVo guestVo) {
+	public GuestVo addGuest(GuestVo guestVo) {
 		int count = gDao.insert(guestVo);
 		GuestVo gVo = null;
 		if(count > 0) {

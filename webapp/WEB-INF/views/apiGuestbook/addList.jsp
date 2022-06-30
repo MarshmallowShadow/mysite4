@@ -120,7 +120,7 @@
 	
 	<script type="text/javascript">
 		
-	//getList/Vo-Related
+	//addList
 		$(document).ready(function(){ //triggers when all elements in the html file finishes loading
 			$.ajax({
 				url: "${pageContext.request.contextPath}/api/guestbook/list",
@@ -140,7 +140,8 @@
 				}
 			});
 		});
-		
+	
+	//add
 		$("#btnSubmit").on("click", function(){
 			var name = $("[name=name]").val();
 			var password = $("[name=password]").val();
@@ -154,18 +155,18 @@
 			//console.log(guestVo);
 			
 			$.ajax({
-				url : "${pageContext.request.contextPath}/api/guestbook/add",
+				url : "${pageContext.request.contextPath}/api/guestbook/add2",
 				type : "post",
-				//contentType : "application/json",
-				data : guestVo,
+				contentType : "application/json",
+				data : JSON.stringify(guestVo),
 				dataType : "json",
 				success : function(gVo){
 					render(gVo, false);
 				},
 				error : function(XHR, status, error) {
-
+				
 				console.error(status + " : " + error);
-
+				
 				}
 			});
 		});
