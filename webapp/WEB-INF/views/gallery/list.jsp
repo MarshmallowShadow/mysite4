@@ -91,15 +91,15 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="" action="" >
+				<form method="${pageContext.request.contextPath }" action="post" >
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
-							<input id="addModalContent" type="text" name="" value="" >
+							<input id="addModalContent" type="text" name="userName" value="" >
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
-							<input id="file" type="file" name="" value="" >
+							<input id="file" type="file" name="orgName" value="" >
 						</div>
 					</div>
 					<div class="modal-footer">
