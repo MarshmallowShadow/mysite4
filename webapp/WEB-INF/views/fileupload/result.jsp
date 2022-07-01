@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>첨부파일</title>
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
 
@@ -21,7 +21,7 @@
 
 		<div id="container" class="clearfix">
 			<!-- 게시판 aside -->
-			<c:import url="/WEB-INF/views/includes/asideBoard.jsp"></c:import>
+			<c:import url="/WEB-INF/views/includes/galleryAside.jsp"></c:import>
 			<!-- //게시판 aside -->
 			
 			
@@ -42,9 +42,8 @@
 			
 			
 			<div id="file">
-				
 					<div>
-						<img id="resultImg" src="">
+						<img id="resultImg" src="${pageContext.request.contextPath }/upload/${saveName}">
 					</div>
 					<p>
 						<a id="btnUpload" href="${pageContext.request.contextPath }/fileupload/form"> 다시 업로드 하기 </a>

@@ -14,18 +14,19 @@ import com.javaex.service.GuestBookService;
 import com.javaex.vo.GuestVo;
 
 @Controller
+@RequestMapping(value="/api/guestbook")
 public class ApiGuestBookController {
 	@Autowired
 	private GuestBookService gService;
 	
-	@RequestMapping(value="/api/guestbook/addList", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/addList", method={RequestMethod.GET, RequestMethod.POST})
 	public String addList() {
 		//System.out.println("api/guestbook: addList");
 		return "apiGuestbook/addList";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/api/guestbook/list", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
 	public List<GuestVo> list() {
 		//System.out.println("api/guestbook: list");
 		List<GuestVo> gList = gService.getList();
@@ -34,7 +35,7 @@ public class ApiGuestBookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/api/guestbook/add", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/add", method= {RequestMethod.GET, RequestMethod.POST})
 	public GuestVo add(@ModelAttribute GuestVo guestVo) {
 		//System.out.println("api/guestbook: add");
 		GuestVo gVo = gService.addGuest(guestVo);
@@ -43,7 +44,7 @@ public class ApiGuestBookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/api/guestbook/add2", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/add2", method= {RequestMethod.GET, RequestMethod.POST})
 	public GuestVo add2(@RequestBody GuestVo guestVo) {
 		//System.out.println("api/guestbook: add2");
 		GuestVo gVo = gService.addGuest(guestVo);
@@ -52,7 +53,7 @@ public class ApiGuestBookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/api/guestbook/delete", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/delete", method={RequestMethod.GET, RequestMethod.POST})
 	public int delete(@ModelAttribute GuestVo gVo) {
 		//System.out.println(gVo);
 		int count = gService.delete(gVo);

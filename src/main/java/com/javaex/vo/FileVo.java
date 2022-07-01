@@ -1,6 +1,7 @@
 package com.javaex.vo;
 
 public class FileVo {
+	int no;
 	private String orgName;
 	private String saveName;
 	private String filePath;
@@ -13,6 +14,10 @@ public class FileVo {
 		this.saveName = saveName;
 		this.filePath = filePath;
 		this.fileSize = fileSize;
+	}
+	public FileVo(int no, String orgName, String saveName, String filePath, long fileSize) {
+		this(orgName, saveName, filePath, fileSize);
+		this.no = no;
 	}
 	
 	public String getOrgName() {

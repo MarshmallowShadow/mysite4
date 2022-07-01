@@ -6,6 +6,7 @@
 	<head>
 	<meta charset="UTF-8">
 		<title>회원가입</title>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 		<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 	</head>
@@ -46,13 +47,15 @@
 					<div id="user">
 						<div id="joinForm">
 							<%-- user controller로 정보 보내기 --%>
-							<form action="${pageContext.request.contextPath}/user/join" method="post">
+							<form id="join-form" action="${pageContext.request.contextPath}/user/join" method="post">
 								<!-- 아이디 -->
 								<div class="form-group">
 									<label class="form-text" for="input-uid">아이디</label>
 									<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-									<button type="button" id="">중복체크</button>
+									<button type="button" id="btnCheck">중복체크</button>
 								</div>
+								
+								<div id="checkRepeat" class="form-group" style="padding: 0px 160px"></div>
 		
 								<!-- 비밀번호 -->
 								<div class="form-group">
@@ -81,9 +84,6 @@
 								<!-- 약관동의 -->
 								<div class="form-group">
 									<span class="form-text">약관동의</span> 
-									<input type="radio" id="rdo-disagree" name="agree" value="false" checked>
-									<label for="rdo-agree">서비스 약관에 동의하지 않습니다.</label> <br>
-									<span class="form-text"></span> 
 									<input type="radio" id="rdo-agree" name="agree" value="true">
 									<label for="rdo-agree">서비스 약관에 동의합니다.</label> 
 								</div>
@@ -110,4 +110,52 @@
 		<!-- //wrap -->
 	
 	</body>
+	
+	<script type="text/javascript">
+		$("#join-form").on("submit", function(){
+			var id = $("#input-uid").val();
+			var password = $("#input-pass").val();
+			
+			if(id == "" || id == null) {
+				alert("아이디를 입력하세요.");
+				return false;
+			}
+			if(password.length < 8) {
+				alert("비밀번호 8 자리 입력하세요.");
+				return false;
+			}
+			if($("#chk-agree").is(":checked") == false) {
+				alert("약관동의 해주세요.");
+				return false;
+			}
+			
+			return true;
+		});
+		
+		$("#btnCheck").on("click", function(){
+			var id = $("#input-uid").val();
+			
+			if(id != null){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/api/user/checkId",
+					type : "post",
+					contentType : "application/json",
+					data: JSON.stringify(id),
+					dataType: "json",
+					success : function(result){
+						//console.log(gList);
+						/*성공시 처리해야될 코드 작성*/
+						if(result == true) {
+							$("#checkRepeat").html('<font color="red">사용할 수 없는 아이디입니다.</font>');
+						} else {
+							$("#checkRepeat").html("사용 가능한 아이디입니다.");
+						}
+					},
+					error : function(XHR, status, error) {
+						console.error(status + " : " + error);
+					}
+				});
+			}
+		});
+	</script>
 </html>

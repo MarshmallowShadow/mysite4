@@ -1,5 +1,7 @@
 package com.javaex.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,9 +37,14 @@ public class UserDao {
 		return authUser;
 	}
 	
-	//수정 폼 들어가기 전에 필요한 전보 가져오기 (authUser에 있던 no 가져오고 아이디, 비번, 이름, 성별 저장된 UserVo리턴)
+	//수정 폼 들어가기 전에 필요한 정보 가져오기 (authUser에 있던 no 가져오고 아이디, 비번, 이름, 성별 저장된 UserVo리턴)
 	public UserVo getUser(int no) {
 		UserVo uVo = sqlSession.selectOne("users.getUser", no);
 		return uVo;
+	}
+	
+	public String getId(String id) {
+		String checkId = sqlSession.selectOne("users.getId", id);
+		return checkId;
 	}
 }

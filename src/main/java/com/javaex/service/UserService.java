@@ -1,5 +1,7 @@
 package com.javaex.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,15 @@ public class UserService {
 	public UserVo getUser(int no) {
 		UserVo uVo = uDao.getUser(no);
 		return uVo;
+	}
+	
+	public boolean checkId(String id) {
+		String checkId = uDao.getId(id);
+		
+		if(checkId != null) {
+			return true;
+		}
+		
+		return false;
 	}
 }
