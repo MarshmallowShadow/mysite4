@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>갤러리</title>
 
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
@@ -20,12 +20,11 @@
 
 <body>
 	<div id="wrap">
-
-		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 		<!-- //nav -->
 
-		<c:import url="/WEB-INF/views/include/galleryAside.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/galleryAside.jsp"></c:import>
 		<!-- //aside -->
 
 
@@ -48,10 +47,11 @@
 			<div id="gallery">
 				<div id="list">
 			
-					
+					<c:if test="${authUser != null }">
 						<button id="btnImgUpload">이미지올리기</button>
 						<div class="clear"></div>
-
+					</c:if>
+					
 			
 					<ul id="viewArea">
 						
@@ -74,7 +74,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
