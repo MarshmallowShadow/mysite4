@@ -11,7 +11,7 @@ import com.javaex.service.UserService;
 
 @Controller
 @RequestMapping(value="/api/user")
-public class apiUserController {
+public class ApiUserController {
 	@Autowired
 	private UserService uService;
 	
