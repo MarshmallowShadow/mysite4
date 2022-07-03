@@ -54,17 +54,16 @@
 					
 			
 					<ul id="viewArea">
-						
 						<!-- 이미지반복영역 -->
+						<c:forEach items="${gList }" var="gMap">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="">
-									<div class="imgWriter">작성자: <strong>유재석</strong></div>
+									<img class="imgItem" src="${pageContext.request.contextPath }/upload/${gMap.SAVENAME}" data-no="${gList.NO}">
+									<div class="imgWriter">작성자: <strong>${gMap.NAME}</strong></div>
 								</div>
 							</li>
+						</c:forEach>
 						<!-- 이미지반복영역 -->
-						
-						
 					</ul>
 				</div>
 				<!-- //list -->
@@ -91,15 +90,15 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="${pageContext.request.contextPath }" action="post" >
+				<form action="${pageContext.request.contextPath }/gallery/upload" method="post" enctype="multipart/form-data">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
-							<input id="addModalContent" type="text" name="userName" value="" >
+							<input id="addModalContent" type="text" name="content" value="" >
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
-							<input id="file" type="file" name="orgName" value="" >
+							<input id="file" type="file" name="file" value="" >
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -133,13 +132,14 @@
 					</div>
 					
 				</div>
-				<form method="" action="">
+				<form action="${pageContext.request.contextPath }/gallery/delete" method="post">
 					<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
-				</div>
-				
-				
+						<input type="hidden" id="viewModelNo" name="no" value="">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						<c:if test="${authUser.no == gVo.userNo}">
+							<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+						</c:if>
+					</div>
 				</form>
 				
 			</div><!-- /.modal-content -->
@@ -150,9 +150,36 @@
 </body>
 
 <script type="text/javascript">
+	
+	$("#btnImgUpload").on("click", function(){
+		
+		$("#addModal").modal("show");
+	});
+	
+	$("#viewArea").on("click", ".imgItem", function(){
+		var $this = $(this);
+		var no = this.data("no");
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/api/guestbook/get",
+			type: "post",
+			contentType : "application/json",
+			data: JSON.stringify(no),
+			dataType: "json",
+			success: function(gVo){
+				$("viewModelImg").setAttribute("src", "${pageContext.request.contextPath }/upload/" + gVo.saveName);
+				$("#viewModelContent").html(gVo.content);
+				$("#viewModelNo").val(gVo.no);
+				$("#viewModal").modal("show");
+			},
+			error : function(XHR, status, error) {
 
+				console.error(status + " : " + error);
 
-
+			}
+		});
+	});
+	
 </script>
 
 
