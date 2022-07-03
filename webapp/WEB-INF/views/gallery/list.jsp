@@ -56,9 +56,9 @@
 					<ul id="viewArea">
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gList }" var="gMap">
-							<li>
+							<li id="g${gMap.NO}">
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath }/upload/${gMap.SAVENAME}" data-no="${gList.NO}">
+									<img class="imgItem" src="${pageContext.request.contextPath }/upload/${gMap.SAVENAME}" data-user_no="${gMap.USERNO}" data-no="${gMap.NO}" >
 									<div class="imgWriter">작성자: <strong>${gMap.NAME}</strong></div>
 								</div>
 							</li>
@@ -124,7 +124,7 @@
 				<div class="modal-body">
 					
 					<div class="formgroup" >
-						<img id="viewModelImg" src =""> <!-- ajax로 처리 : 이미지출력 위치-->
+						<img id="viewModelImg" width="300px" src =""> <!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">
@@ -132,13 +132,11 @@
 					</div>
 					
 				</div>
-				<form action="${pageContext.request.contextPath }/gallery/delete" method="post">
+				<form id="deleteForm" action="${pageContext.request.contextPath }/gallery/delete" method="post">
 					<div class="modal-footer">
 						<input type="hidden" id="viewModelNo" name="no" value="">
+						<button type="submit" class="btn btn-danger" id="btnDel">삭제</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						<c:if test="${authUser.no == gVo.userNo}">
-							<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
-						</c:if>
 					</div>
 				</form>
 				
@@ -152,25 +150,58 @@
 <script type="text/javascript">
 	
 	$("#btnImgUpload").on("click", function(){
-		
 		$("#addModal").modal("show");
 	});
 	
 	$("#viewArea").on("click", ".imgItem", function(){
 		var $this = $(this);
-		var no = this.data("no");
+		var no = $this.data("no");
+		var userNo = $this.data("user_no");
+		console.log(userNo);
+		
+		var authNo = parseInt('${authUser.no}');
+		console.log(authNo);
+		var delStr = '';
 		
 		$.ajax({
-			url: "${pageContext.request.contextPath}/api/guestbook/get",
+			url: "${pageContext.request.contextPath}/api/gallery/getGallery",
 			type: "post",
 			contentType : "application/json",
 			data: JSON.stringify(no),
 			dataType: "json",
 			success: function(gVo){
-				$("viewModelImg").setAttribute("src", "${pageContext.request.contextPath }/upload/" + gVo.saveName);
+				$("#viewModelImg").attr("src", "${pageContext.request.contextPath }/upload/" + gVo.saveName);
 				$("#viewModelContent").html(gVo.content);
 				$("#viewModelNo").val(gVo.no);
+				if(authNo == userNo) {
+					$("#btnDel").show();
+				}else {
+					$("#btnDel").hide();
+				}
 				$("#viewModal").modal("show");
+			},
+			error : function(XHR, status, error) {
+
+				console.error(status + " : " + error);
+
+			}
+		});
+	});
+	
+	$("#deleteForm").on("submit", function(){
+		$("#viewModal").modal("hide");
+		int no = $("#viewModelNo").val();
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/api/gallery/delete",
+			type: "post",
+			contentType : "application/json",
+			data: JSON.stringify(no),
+			dataType: "json",
+			success: function(success){
+				if(success > 0) {
+					$("#g" + no).remove();
+				}
 			},
 			error : function(XHR, status, error) {
 

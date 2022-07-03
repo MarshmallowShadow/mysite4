@@ -61,4 +61,13 @@ public class GalleryService {
 		return count;
 	}
 	
+	public GalleryVo getGallery(int no) {
+		GalleryVo gVo = gDao.getGallery(no);
+		return gVo;
+	}
+	
+	public int delete(int no) {
+		int count = gDao.delete(no);
+		return count;
+	}
 }

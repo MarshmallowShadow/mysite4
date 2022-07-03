@@ -44,6 +44,8 @@ public class GalleryController {
 		GalleryVo gVo = new GalleryVo();
 		gVo.setUserNo(userNo);
 		gVo.setContent(content);
+		System.out.println(gVo);
+		
 		int count = gService.upload(file, gVo);
 		
 		return "redirect:/gallery/list";

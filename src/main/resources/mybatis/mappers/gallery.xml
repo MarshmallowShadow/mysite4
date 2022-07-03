@@ -5,7 +5,7 @@
 	<insert id="insert" parameterType="FileVo">
 	<![CDATA[
 		insert into gallery
-		values(seq_files_no.nextval, #{userNo}, #{content}, #{filePath}, #{orgName}, #{saveName}, #{fileSize})
+		values(seq_gallery_no.nextval, #{userNo}, #{content}, #{filePath}, #{orgName}, #{saveName}, #{fileSize})
 	]]>
 	</insert>
 	
@@ -19,6 +19,7 @@
 	<select id="getList" resultType="map">
 	<![CDATA[
 		select	g.no,
+				user_no USERNO,
 				name,
 				filePath,
 				saveName
@@ -31,8 +32,9 @@
 	<![CDATA[
 		select	no,
 				content,
+				saveName
 		from gallery
-		where saveName = #{saveName}
+		where no = #{no}
 	]]>
 	</select>
 </mapper>

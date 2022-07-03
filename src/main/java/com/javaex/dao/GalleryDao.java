@@ -16,11 +16,22 @@ public class GalleryDao {
 	
 	public List<Map<String, Object>> getList() {
 		List<Map<String, Object>> gList = sqlSession.selectList("gallery.getList");
+		System.out.println(gList);
 		return gList;
 	}
 	
 	public int add(GalleryVo gVo) {
 		int count = sqlSession.insert("gallery.insert", gVo);
+		return count;
+	}
+	
+	public GalleryVo getGallery(int no) {
+		GalleryVo gVo = sqlSession.selectOne("gallery.getGallery", no);
+		return gVo;
+	}
+	
+	public int delete(int no) {
+		int count = sqlSession.delete("gallery.delte", no);
 		return count;
 	}
 }
