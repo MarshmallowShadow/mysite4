@@ -31,7 +31,7 @@ public class GalleryDao {
 	}
 	
 	public int delete(int no) {
-		int count = sqlSession.delete("gallery.delte", no);
+		int count = sqlSession.delete("gallery.delete", no);
 		return count;
 	}
 }

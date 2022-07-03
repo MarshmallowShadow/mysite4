@@ -132,10 +132,10 @@
 					</div>
 					
 				</div>
-				<form id="deleteForm" action="${pageContext.request.contextPath }/gallery/delete" method="post">
+				<form id="deleteForm" action="${pageContext.request.contextPath }/api/gallery/delete" method="post">
 					<div class="modal-footer">
 						<input type="hidden" id="viewModelNo" name="no" value="">
-						<button type="submit" class="btn btn-danger" id="btnDel">삭제</button>
+						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					</div>
 				</form>
@@ -188,9 +188,9 @@
 		});
 	});
 	
-	$("#deleteForm").on("submit", function(){
+	$("#btnDel").on("click", function(){
 		$("#viewModal").modal("hide");
-		int no = $("#viewModelNo").val();
+		var no = $("#viewModelNo").val();
 		
 		$.ajax({
 			url: "${pageContext.request.contextPath}/api/gallery/delete",
@@ -198,8 +198,8 @@
 			contentType : "application/json",
 			data: JSON.stringify(no),
 			dataType: "json",
-			success: function(success){
-				if(success > 0) {
+			success: function(result){
+				if(result > 0) {
 					$("#g" + no).remove();
 				}
 			},

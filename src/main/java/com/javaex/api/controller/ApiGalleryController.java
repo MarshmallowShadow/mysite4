@@ -24,7 +24,7 @@ public class ApiGalleryController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/getGallery", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
 	public int delete(@RequestBody int no) {
 		int count = gService.delete(no);
 		return count;
