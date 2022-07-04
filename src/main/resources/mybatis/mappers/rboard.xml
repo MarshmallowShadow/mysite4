@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rboard">
+	<!-- resultMap -->
+	<resultMap id="resultMapRBoardVo" type="RBoardVo">
+		<result column="no" property="no" />
+		<result column="user_no" property="userNo" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="reg_date" property="regDate" />
+		<result column="group_no" property="groupNo" />
+		<result column="order_no" property="orderNo" />
+		<result column="depth" property="depth" />
+	</resultMap>
+	
+<!-- 쿼리문 작성 -->
+	<!-- insert -->
+	<insert id="insert" parameterType="RBoardVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select seq_rboard_no.nextval from dual
+		</selectKey>
+		
+		<![CDATA[
+			insert into rboard
+			values(#{no}, #{userNo}, #{title}, #{content}, 0, sysdate, #{no}, #{orderNo}, #{depth})
+		]]>
+	</insert>
+	
+	<!-- insert (comment) -->
+	<insert id="comment" parameterType="RBoardVo">
+		<![CDATA[
+			insert into rboard
+			values(seq_rboard_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, #{groupNo}, #{orderNo}, #{depth})
+		]]>
+	</insert>
+	
+	<!-- delete -->
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from rboard
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<!-- update (read) -->
+	<update id="plusView" parameterType="int">
+		<![CDATA[
+			update	rboard
+			set		hit = hit + 1
+			where	no = #{no}
+		]]>
+	</update>
+	
+	<!-- update (order_no) -->
+	<update id="plusOrderNo" parameterType="RBoardVo">
+		<![CDATA[
+			update	rboard
+			set		order_no = order_no + 1
+			where	group_no = #{groupNo}
+			and		order_no >= #{orderNo}
+		]]>
+	</update>
+	
+	<!-- update (modify) -->
+	<update id="modify" parameterType="RBoardVo">
+		<![CDATA[
+			update	rboard
+			set		title = #{title},
+					content = #{content}
+			where	no = #{no}
+		]]>
+	</update>
+	
+	<!-- getList -->
+	<select id="getList" parameterType="String" resultType="map">
+		<![CDATA[
+			select	r.no,
+					user_no USERNO,
+					title,
+					hit,
+					to_char(reg_date,'YY-MM-DD') REGDATE,
+					name,
+					depth
+			from users u, rboard r
+			where user_no = u.no
+		]]>
+		<if test="value!=null">
+			and (title like '%'||#{value}||'%' or name like '%'||#{value}||'%')
+		</if>
+		<![CDATA[
+			order by group_no DESC, order_no ASC
+		]]>
+	</select>
+	
+	<!-- getBoard -->
+	<select id="getRBoard" parameterType="int" resultType="map">
+		<![CDATA[
+			select	r.no NO,
+					user_no USERNO,
+					title,
+					content,
+					hit,
+					reg_date REGDATE,
+					name,
+					group_no GROUPNO,
+					order_no ORDERNO,
+					depth
+			from users u, rboard r
+			where user_no = u.no
+			and r.no = #{no}
+		]]>
+	</select>
+</mapper>

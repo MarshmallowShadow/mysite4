@@ -52,38 +52,44 @@
 								<!-- 작성자 -->
 								<div class="form-group">
 									<span class="form-text">작성자</span>
-									<span class="form-value">${bMap.NAME }</span>
+									<span class="form-value">${rMap.NAME }</span>
 								</div>
 								
 								<!-- 조회수 -->
 								<div class="form-group">
 									<span class="form-text">조회수</span>
-									<span class="form-value">${bMap.HIT }</span>
+									<span class="form-value">${rMap.HIT }</span>
 								</div>
 								
 								<!-- 작성일 -->
 								<div class="form-group">
 									<span class="form-text">작성일</span>
-									<span class="form-value">${bMap.REGDATE }</span>
+									<span class="form-value">${rMap.REGDATE }</span>
 								</div>
 								
 								<!-- 제목 -->
 								<div class="form-group">
 									<span class="form-text">제 목</span>
-									<span class="form-value">${bMap.TITLE }</span>
+									<span class="form-value">${rMap.TITLE }</span>
 								</div>
 							
 								<!-- 내용 -->
 								<div id="txt-content">
 									<span class="form-value" >
-										${bMap.CONTENT }
+										${rMap.CONTENT }
 									</span>
 								</div>
 								
-								<c:if test="${authUser.no == bMap.USERNO }">
-									<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm/${bMap.NO }">수정</a>
-								</c:if>
-								<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>
+								<c:choose>
+									<c:when test="${authUser.no == rMap.USERNO }">
+										<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/modifyForm/${rMap.NO }">수정</a>
+									</c:when>
+									<c:when test="${authUser.no != null }">
+										<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/writeForm?groupNo=${rMap.GROUPNO }&orderNo=${rMap.ORDERNO + 1 }&depth=${rMap.DEPTH + 1 }">댓글달기</a>
+									</c:when>
+								</c:choose>
+								
+								<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/list">목록</a>
 								
 							</form>
 							<!-- //form -->

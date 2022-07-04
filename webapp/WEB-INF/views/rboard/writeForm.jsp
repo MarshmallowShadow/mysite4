@@ -5,21 +5,21 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>게시판</title>
+		<title>Insert title here</title>
 		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 		<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 		<link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 		
 		<script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 	</head>
-
-
+	
+	
 	<body>
 		<div id="wrap">
-			
+	
 			<!-- //header -->
 			<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-				
+	
 			<div id="container" class="clearfix">
 				<div id="aside">
 					<h2>게시판</h2>
@@ -46,53 +46,35 @@
 					<!-- //content-head -->
 		
 					<div id="board">
-						<div id="read">
-							<form action="#" method="get">
-								<%-- 컨트롤러가 보내준 Vo를 통해서 정보들 넣어주기 --%>
-								<!-- 작성자 -->
-								<div class="form-group">
-									<span class="form-text">작성자</span>
-									<span class="form-value">${bMap.NAME }</span>
-								</div>
-								
-								<!-- 조회수 -->
-								<div class="form-group">
-									<span class="form-text">조회수</span>
-									<span class="form-value">${bMap.HIT }</span>
-								</div>
-								
-								<!-- 작성일 -->
-								<div class="form-group">
-									<span class="form-text">작성일</span>
-									<span class="form-value">${bMap.REGDATE }</span>
-								</div>
-								
+						<div id="writeForm">
+							<%-- 게시글 작성 폼 --%>
+							<form action="${pageContext.request.contextPath}/rboard/write" method="get">
 								<!-- 제목 -->
 								<div class="form-group">
-									<span class="form-text">제 목</span>
-									<span class="form-value">${bMap.TITLE }</span>
+									<label class="form-text" for="txt-title">제목</label>
+									<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
+									<input type="hidden" name="groupNo" value="${rVo.groupNo }">
+									<input type="hidden" name="orderNo" value="${rVo.orderNo }">
+									<input type="hidden" name="depth" value="${rVo.depth }">
 								</div>
 							
 								<!-- 내용 -->
-								<div id="txt-content">
-									<span class="form-value" >
-										${bMap.CONTENT }
-									</span>
+								<div class="form-group">
+									<textarea id="txt-content" name="content"></textarea>
 								</div>
 								
-								<c:if test="${authUser.no == bMap.USERNO }">
-									<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm/${bMap.NO }">수정</a>
-								</c:if>
-								<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>
+								<a id="btn_cancel" href="${pageContext.request.contextPath}/rboard/list">취소</a>
+								<button id="btn_add" type="submit" >등록</button>
 								
 							</form>
 							<!-- //form -->
 						</div>
-						<!-- //read -->
+						<!-- //writeForm -->
 					</div>
 					<!-- //board -->
 				</div>
 				<!-- //content  -->
+	
 	
 			</div>
 			<!-- //container  -->

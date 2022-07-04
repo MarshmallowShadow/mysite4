@@ -65,16 +65,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${bList}" var="bMap">
+									<c:forEach items="${rList}" var="rMap">
 										<tr>
-											<td>${bMap.NO }</td>
-											<td class="text-left"><a href="${pageContext.request.contextPath}/board/read/${bMap.NO }">${bMap.TITLE }</a></td>
-											<td>${bMap.NAME }</td>
-											<td>${bMap.HIT }</td>
-											<td>${bMap.REGDATE }</td>
+											<td>${rMap.NO }</td>
+											<td class="text-left"><a href="${pageContext.request.contextPath}/rboard/read/${rMap.NO }">${rMap.TITLE }</a></td>
+											<td>${rMap.NAME }</td>
+											<td>${rMap.HIT }</td>
+											<td>${rMap.REGDATE }</td>
 											<td>
-												<c:if test="${authUser.no == bMap.USERNO }">
-													<a href="${pageContext.request.contextPath}/board/delete/${bMap.NO }">[삭제]</a>
+												<c:if test="${authUser.no == rMap.USERNO }">
+													<a href="${pageContext.request.contextPath}/board/delete/${rMap.NO }">[삭제]</a>
 												</c:if>
 											</td>
 										</tr>
@@ -102,7 +102,7 @@
 							</div>
 							<c:choose>
 								<c:when test="${authUser == null }"></c:when>
-								<c:otherwise><a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a></c:otherwise>
+								<c:otherwise><a id="btn_write" href="${pageContext.request.contextPath}/rboard/writeForm?groupNo=0&orderNo=1&depth=0">글쓰기</a></c:otherwise>
 							</c:choose>
 						
 						</div>
@@ -116,8 +116,8 @@
 			<!-- //container  -->
 			
 	
-			<!-- //footer -->
 			<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+			<!-- //footer -->
 		</div>
 		<!-- //wrap -->
 	

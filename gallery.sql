@@ -1,9 +1,9 @@
 drop table gallery;
-drop table seq_gallery_no;
+drop sequence seq_gallery_no;
 
 create table gallery(
     no          number,
-    user_no     number,
+    user_no     number				not null,
     content     varchar2(1000),
     filePath    varchar2(500),
     orgName     varchar2(200),
