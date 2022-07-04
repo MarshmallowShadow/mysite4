@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.RBoardService;
-import com.javaex.vo.BoardVo;
 import com.javaex.vo.RBoardVo;
 import com.javaex.vo.UserVo;
 

@@ -9,8 +9,6 @@
 		<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 		<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 		<link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-		
-		<script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 	</head>
 
 
