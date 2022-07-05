@@ -36,6 +36,7 @@ public class BoardService {
 	}
 
 	public Map<String, Object> getPageList(String keyword, int page){
+		//
 		Map<String, Object> bMap = new HashMap<>();
 		int startBoard = (page-1) * 10 + 1;
 		int endBoard = page * 10;
