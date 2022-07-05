@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javaex.service.BoardService;
+import com.javaex.service.RBoardService;
 
-@RequestMapping(value="/api/board")
+@RequestMapping(value="/api/rboard")
 @Controller
-public class ApiBoardController {
+public class ApiRBoardController {
 	@Autowired
-	private BoardService bService;
+	private RBoardService rService;
 	
 	@ResponseBody
 	@RequestMapping(value="/getPages", method= {RequestMethod.GET, RequestMethod.POST})
 	public int getPages() {
-		int count = bService.getPages();
+		int count = rService.getPages();
 		return count;
 	}
 }

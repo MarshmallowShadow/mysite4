@@ -25,10 +25,13 @@ public class RBoardController {
 	private RBoardService rService;
 	
 	@RequestMapping(value="/list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
+	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword,
+			@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		//System.out.println("BoardController: addList");
-		List<Map<String, Object>> rList = rService.getList(keyword);
+		List<Map<String, Object>> rList = rService.getList(keyword, page);
 		model.addAttribute("rList", rList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("page", page);
 		return "rboard/list";
 	}
 	

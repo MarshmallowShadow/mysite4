@@ -59,6 +59,7 @@ public class BoardDao {
 		return bMap;
 	}
 	
+	//총 글 수 가져오기
 	public int getCount() {
 		int count = sqlSession.selectOne("board.getCount");
 		return count;

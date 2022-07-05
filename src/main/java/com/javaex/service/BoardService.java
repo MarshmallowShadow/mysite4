@@ -35,7 +35,7 @@ public class BoardService {
 		return bList;
 	}
 
-	public List<Map<String, Object>> getPageList(String keyword, int page){
+	public Map<String, Object> getPageList(String keyword, int page){
 		Map<String, Object> bMap = new HashMap<>();
 		int startBoard = (page-1) * 10 + 1;
 		int endBoard = page * 10;
@@ -71,7 +71,7 @@ public class BoardService {
         pMap.put("next", next);
 
 		
-		return bList;
+		return pMap;
 	}
 
 	public Map<String, Object> getBoard(boolean hit, int no) {
@@ -80,16 +80,6 @@ public class BoardService {
 		}
 		Map<String, Object> bMap = bDao.getBoard(no);
 		return bMap;
-	}
-
-	public int getPages() {
-		int count = bDao.getCount();
-		if (count % 10 != 0) {
-			count = count / 10 + 1;
-		} else {
-			count = count / 10;
-		}
-		return count;
 	}
 
 	// test

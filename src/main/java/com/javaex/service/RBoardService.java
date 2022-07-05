@@ -1,6 +1,7 @@
 package com.javaex.service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +39,15 @@ public class RBoardService {
 		return count;
 	}
 	
-	public List<Map<String, Object>> getList(String keyword){
-		List<Map<String, Object>> rList = rDao.getList(keyword);
+	public List<Map<String, Object>> getList(String keyword, int page){
+		Map<String, Object> rMap = new HashMap<>();
+		int startBoard = (page-1) * 10 + 1;
+		int endBoard = page * 10;
+		rMap.put("keyword", keyword);
+		rMap.put("startBoard", startBoard);
+		rMap.put("endBoard", endBoard);
+		
+		List<Map<String, Object>> rList = rDao.getList(rMap);
 		
 		for(int i=0; i<rList.size(); i++) {
 			for(int j=0; j < ((BigDecimal)rList.get(i).get("DEPTH")).intValue(); j++) {
@@ -57,5 +65,15 @@ public class RBoardService {
 		
 		Map<String, Object> rMap = rDao.getRBoard(no);
 		return rMap;
+	}
+	
+	public int getPages() {
+		int count = rDao.getCount();
+		if (count % 10 != 0) {
+			count = count / 10 + 1;
+		} else {
+			count = count / 10;
+		}
+		return count;
 	}
 }

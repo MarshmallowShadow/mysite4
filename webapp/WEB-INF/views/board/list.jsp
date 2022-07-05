@@ -30,7 +30,7 @@
 				<div id="aside">
 					<h2>게시판</h2>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/board/pageList">일반게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/list">일반게시판</a></li>
 						<li><a href="${pageContext.request.contextPath}/rboard/list">댓글게시판</a></li>
 					</ul>
 				</div>
@@ -53,7 +53,7 @@
 	
 					<div id="board">
 						<div id="list">
-							<form action="${pageContext.request.contextPath}/board/pageList"
+							<form action="${pageContext.request.contextPath}/board/list"
 								method="get">
 								<div class="form-group text-right">
 									<input type="text" name="keyword" value="">
@@ -72,7 +72,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${bList}" var="bMap">
+									<c:forEach items="${pMap.bList}" var="bMap">
 										<tr>
 											<td>${bMap.NO }</td>
 											<td class="text-left"><a
@@ -91,10 +91,21 @@
 	
 							<div id="paging">
 								<ul id="pageList">
+									<c:if test="${pMap.prev }">
+										<li><a href="${pageContext.request.contextPath}/board/list?page=${pMap.startPageBtnNo-1}&keyword=${keyword}">◀</a></li>
+									</c:if>
 									
+									<c:forEach begin="${pMap.startPageBtnNo}" end="${pMap.endPageBtnNo}" step="1" var="pageNum">
+									<c:choose>
+										<c:when test="${pageNum == page}"><li class="active"><a href="${pageContext.request.contextPath}/board/pageList?page=${pageNum }&keyword=${keyword}">${pageNum }</a></li></c:when>
+										<c:otherwise><li><a href="${pageContext.request.contextPath}/board/list?page=${pageNum }&keyword=${keyword}">${pageNum }</a></li></c:otherwise>
+									</c:choose>
+									</c:forEach>
+									
+									<c:if test="${pMap.next }">
+										<li><a href="${pageContext.request.contextPath}/board/list?page=${pMap.endPageBtnNo+1}&keyword=${keyword}">▶</a></li>
+									</c:if>
 								</ul>
-	
-	
 								<div class="clear"></div>
 							</div>
 							<c:choose>
@@ -122,62 +133,4 @@
 		<!-- //wrap -->
 	
 	</body>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var page = parseInt("${page}") - 1;
-			var keyword = "${keyword}";
-			
-			$.ajax({
-				url: "${pageContext.request.contextPath}/api/board/getPages",
-				type : "post",
-				
-				dataType: "json",
-				success : function(count){
-					var left = page - (page%5);
-					if(left < 1){
-						render(1, keyword, "◀", false);
-					} else {
-						render(left, keyword, "◀", false);
-					}
-					var right = left + 6;
-					console.log(right);
-					
-					
-					for(var i=left+1; i<right; i++) {
-						if(i > count){
-							break;
-						}
-						if(i == page+1) {
-							render(i, keyword, i, true);
-						} else {
-							render(i, keyword, i, false);
-						}
-					}
-					
-					if(right > count) {
-						render(count, keyword, "▶", false);
-					} else {
-						render(right, keyword, "▶", false);
-					}
-					
-				},
-				error : function(XHR, status, error) {
-					console.error(status + " : " + error);
-				}
-			});
-		});
-		
-		function render(pageNum, keyword, num, active) {
-			var str = '';
-			if(active == true){
-				str += '<li class="active">'
-			} else {
-				str += '<li>'
-			}
-			str += '<a href="${pageContext.request.contextPath}/board/pageList?page=' + pageNum + '&keyword='+ keyword +'">' + num + '</a></li>\n';
-			
-			$("#pageList").append(str);
-		}
-	</script>
 </html>

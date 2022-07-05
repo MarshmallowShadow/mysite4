@@ -24,21 +24,21 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
-	@RequestMapping(value="/list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
+	@RequestMapping(value="/list2", method = {RequestMethod.GET, RequestMethod.POST})
+	public String list2(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
 		//System.out.println("BoardController: list");
 		List<Map<String, Object>> bList = bService.getList(keyword);
 		model.addAttribute("bList", bList);
 		return "board/list";
 	}
 	
-	@RequestMapping(value="/pageList")
-	public String pageList(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword,
+	@RequestMapping(value="/list")
+	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword,
 			@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		//System.out.println("BoardController: PageList");
-		List<Map<String, Object>> bList = bService.getPageList(keyword, page);
+		Map<String, Object> pMap = bService.getPageList(keyword, page);
 		
-		model.addAttribute("bList", bList);
+		model.addAttribute("pMap", pMap);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", page);
 		return "board/list";

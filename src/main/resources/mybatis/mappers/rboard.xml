@@ -72,7 +72,7 @@
 		]]>
 	</update>
 	
-	<!-- getList -->
+<!-- getList 
 	<select id="getList" parameterType="String" resultType="map">
 		<![CDATA[
 			select	r.no,
@@ -92,6 +92,45 @@
 			order by group_no DESC, order_no ASC
 		]]>
 	</select>
+-->	
+	<!-- getPageList -->
+	<select id="getList" parameterType="map" resultType="map">
+		<![CDATA[
+			select	no,
+					USERNO,
+					title,
+					hit,
+					regDate,
+					name,
+					depth
+			from (select	rownum rn,
+							no,
+							USERNO,
+							title,
+							hit,
+							regDate,
+							name,
+							depth
+			from (select	r.no,
+							user_no USERNO,
+							title,
+							hit,
+							to_char(reg_date,'YY-MM-DD') REGDATE,
+							name,
+							depth
+							from users u, rboard r
+							where user_no = u.no
+		]]>
+							<if test="value!=null">
+								and (title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%')
+							</if>
+		<![CDATA[
+							order by group_no DESC, order_no ASC) ot
+			) ort
+			where rn >= #{startBoard}
+			and rn <= #{endBoard}
+		]]>
+	</select>
 	
 	<!-- getBoard -->
 	<select id="getRBoard" parameterType="int" resultType="map">
@@ -109,6 +148,12 @@
 			from users u, rboard r
 			where user_no = u.no
 			and r.no = #{no}
+		]]>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		<![CDATA[
+			select count(*) from rboard
 		]]>
 	</select>
 </mapper>

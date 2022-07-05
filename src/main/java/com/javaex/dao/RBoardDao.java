@@ -51,8 +51,8 @@ public class RBoardDao {
 	}
 	
 	//게시판에 나열할 게시글 목록 가져오기
-	public List<Map<String, Object>> getList(String keyword){
-		List<Map<String, Object>> rList = sqlSession.selectList("rboard.getList", keyword);
+	public List<Map<String, Object>> getList(Map<String, Object> pMap){
+		List<Map<String, Object>> rList = sqlSession.selectList("rboard.getList", pMap);
 		return rList;
 	}
 	
@@ -61,5 +61,11 @@ public class RBoardDao {
 	public Map<String, Object> getRBoard(int no) {
 		Map<String, Object> rMap = sqlSession.selectOne("rboard.getRBoard", no);
 		return rMap;
+	}
+	
+	//총 글 수 가져오기
+	public int getCount() {
+		int count = sqlSession.selectOne("rboard.getCount");
+		return count;
 	}
 }
