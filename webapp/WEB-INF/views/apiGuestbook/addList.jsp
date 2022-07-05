@@ -248,9 +248,5 @@
 			}
 			
 		};
-		
-		function remove(no){
-			
-		};
 	</script>
 </html>
