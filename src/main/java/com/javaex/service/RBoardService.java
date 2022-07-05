@@ -42,7 +42,7 @@ public class RBoardService {
 		List<Map<String, Object>> rList = rDao.getList(keyword);
 		
 		for(int i=0; i<rList.size(); i++) {
-			for(int j=0; j < ((BigDecimal)rList.get(i).get("DEPTH")).intValue(); i++) {
+			for(int j=0; j < ((BigDecimal)rList.get(i).get("DEPTH")).intValue(); j++) {
 				rList.get(i).put("TITLE", (Object)("&emsp;" + rList.get(i).get("TITLE")));
 			}
 		}
