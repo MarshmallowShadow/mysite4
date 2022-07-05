@@ -64,7 +64,43 @@
 			and (title like '%'||#{value}||'%' or name like '%'||#{value}||'%')
 		</if>
 		<![CDATA[
-			order by regDate desc
+			order by b.no desc
+		]]>
+	</select>
+	
+	<!-- getPageList -->
+	<select id="getPageList" parameterType="map" resultType="map">
+		<![CDATA[
+			select	no,
+					title,
+					hit,
+					regDate,
+					name,
+					userNo
+			from (select	rownum rn,
+							no,
+							title,
+							hit,
+							regDate,
+							name,
+							userNo
+			from (select	b.no,
+							title,
+							hit,
+							to_char(reg_date,'YY-MM-DD') regDate,
+							name,
+							user_no userNo
+							from users u, board b
+							where user_no = u.no
+		]]>
+							<if test="value!=null">
+								and (title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%')
+							</if>
+		<![CDATA[
+							order by b.no desc) ot
+			) ort
+			where rn >= #{startBoard}
+			and rn <= #{endBoard}
 		]]>
 	</select>
 	
@@ -81,6 +117,13 @@
 			from users u, board b
 			where user_no = u.no
 			and b.no = #{no}
+		]]>
+	</select>
+	
+	<!-- getCount -->
+	<select id="getCount" resultType="int">
+		<![CDATA[
+			select count(*) from board
 		]]>
 	</select>
 </mapper>

@@ -45,10 +45,22 @@ public class BoardDao {
 		return bList;
 	}
 	
+	//게시판에 나열할 게시글 목록 가져오기
+	public List<Map<String, Object>> getPageList(Map<String, Object> pMap){
+		List<Map<String, Object>> bList;
+		bList = sqlSession.selectList("board.getPageList", pMap);
+		return bList;
+	}
+	
 	
 	//read에 필요한 해당 개시글에 정보 가져오기
 	public Map<String, Object> getBoard(int no) {
 		Map<String, Object> bMap = sqlSession.selectOne("board.getBoard", no);
 		return bMap;
+	}
+	
+	public int getCount() {
+		int count = sqlSession.selectOne("board.getCount");
+		return count;
 	}
 }

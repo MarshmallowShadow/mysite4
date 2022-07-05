@@ -26,9 +26,21 @@ public class BoardController {
 	
 	@RequestMapping(value="/list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
-		//System.out.println("BoardController: addList");
+		//System.out.println("BoardController: list");
 		List<Map<String, Object>> bList = bService.getList(keyword);
 		model.addAttribute("bList", bList);
+		return "board/list";
+	}
+	
+	@RequestMapping(value="/pageList")
+	public String pageList(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword,
+			@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		//System.out.println("BoardController: PageList");
+		List<Map<String, Object>> bList = bService.getPageList(keyword, page);
+		
+		model.addAttribute("bList", bList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("page", page);
 		return "board/list";
 	}
 	
@@ -97,4 +109,13 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	//test
+	@RequestMapping(value="/massWrite", method = {RequestMethod.GET, RequestMethod.POST})
+	public String massWrite(@ModelAttribute BoardVo bVo, HttpSession session) {
+		//System.out.println("BoardController: write");
+		bService.massInsert();
+		
+		int count = bService.insert(bVo);
+		return "redirect:/board/list";
+	}
 }
