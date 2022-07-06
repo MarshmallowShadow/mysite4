@@ -36,7 +36,7 @@ public class BoardController {
 	public String list(Model model, @RequestParam(value="keyword", required=false, defaultValue="") String keyword,
 			@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		//System.out.println("BoardController: PageList");
-		Map<String, Object> pMap = bService.getPageList(keyword, page);
+		Map<String, Object> pMap = bService.getList(keyword, page);
 		
 		model.addAttribute("pMap", pMap);
 		model.addAttribute("keyword", keyword);

@@ -50,6 +50,4 @@ public class GalleryController {
 		
 		return "redirect:/gallery/list";
 	}
-	
-	//
 }

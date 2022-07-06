@@ -35,7 +35,7 @@ public class BoardService {
 		return bList;
 	}
 
-	public Map<String, Object> getPageList(String keyword, int page){
+	public Map<String, Object> getList(String keyword, int page){
 		//
 		Map<String, Object> bMap = new HashMap<>();
 		int startBoard = (page-1) * 10 + 1;
@@ -44,7 +44,7 @@ public class BoardService {
 		bMap.put("startBoard", startBoard);
 		bMap.put("endBoard", endBoard);
 		
-		List<Map<String, Object>> bList = bDao.getPageList(bMap);
+		List<Map<String, Object>> bList = bDao.getList(bMap);
 		
 		int pageBtnCount = 5;
 		int listCnt = 10;
